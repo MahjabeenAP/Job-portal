@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="uname" placeholder="Username" required><br>
+        <input type="text" name="fname" placeholder="First Name" required><br>
+        <input type="text" name="lname" placeholder="Last Name" required><br>
+        <input type="email" name="email" placeholder="Email" required><br>
+        <input type="password" name="psw1" placeholder="Password" required><br>
+        <input type="password" name="psw2" placeholder="Confirm Password" required><br>
+
+        <label>User Type:</label>
+        <select name="user_type" required>
+            <option value="job_seeker">Job Seeker</option>
+            <option value="employer">Employer</option>
+        </select><br>
+
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>

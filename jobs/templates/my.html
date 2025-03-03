@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Jobs List</title>
+  <!-- Link to your CSS file -->
+  <link rel="stylesheet" href="{% static 'css/my.css' %}">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">JobsPortal</div>
+      <div class="nav-menu">
+        <a href="#" class="nav-link">Login</a>
+        <a href="#" class="nav-link post-job-btn">Post a job</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container jobs-list-section">
+    <h1>My Jobs List</h1>
+    <table class="jobs-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Job Type</th>
+          <th>Posted Date</th>
+          <th>Application Deadline</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example Rows (Replace with Django loop) -->
+        <tr>
+          <td>Laravel Developer</td>
+          <td>Full Time</td>
+          <td>12/05/2022</td>
+          <td>12/06/2022</td>
+          <td class="action-icons">
+            <a href="#" class="edit-icon" title="Edit">&#9998;</a>
+            <a href="#" class="delete-icon" title="Delete">&#128465;</a>
+          </td>
+        </tr>
+        <tr>
+          <td>Laravel Developer</td>
+          <td>Full Time</td>
+          <td>12/05/2022</td>
+          <td>12/06/2022</td>
+          <td class="action-icons">
+            <a href="#" class="edit-icon" title="Edit">&#9998;</a>
+            <a href="#" class="delete-icon" title="Delete">&#128465;</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <p>© 2022 Jobs Portal. Designed by Wilson Kinyua.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+/* -------------------------
+   GENERAL / RESET
+----------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Container Helper */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* -------------------------
+     NAVBAR
+  ----------------------------*/
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 1rem 0;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #116530;
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #333;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .post-job-btn {
+    background-color: #116530;
+    color: #fff !important;
+    border-radius: 5px;
+  }
+  
+  /* -------------------------
+     JOB DETAILS CARD
+  ----------------------------*/
+  .job-details-card {
+    background-color: #fff;
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-title {
+    font-size: 1.8rem;
+    color: #116530;
+    margin-bottom: 1rem;
+  }
+  
+  .job-title span {
+    color: #333;
+    font-weight: 600;
+  }
+  
+  .quick-info {
+    list-style-type: none;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .quick-info li {
+    background-color: #f2f2f2;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+  }
+  
+  .job-actions {
+    margin-bottom: 1.5rem;
+  }
+  
+  .job-actions button {
+    margin-right: 1rem;
+    cursor: pointer;
+  }
+  
+  /* Button Styles */
+  .btn-primary {
+    background-color: #116530;
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  
+  .btn-primary:hover {
+    background-color: #0e4a26;
+  }
+  
+  .btn-outline {
+    background-color: transparent;
+    color: #116530;
+    border: 2px solid #116530;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+  
+  .btn-outline:hover {
+    background-color: #116530;
+    color: #fff;
+  }
+  
+  /* -------------------------
+     SECTION HEADINGS & TEXT
+  ----------------------------*/
+  .section-heading {
+    font-size: 1.3rem;
+    color: #116530;
+    margin-bottom: 0.5rem;
+  }
+  
+  .job-description {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  
+  .requirements-list {
+    line-height: 1.6;
+    list-style: inside;
+    padding-left: 1rem; /* in case you prefer outside bullets */
+    margin-bottom: 1rem;
+  }
+  
+  /* -------------------------
+     FOOTER
+  ----------------------------*/
+  .footer-section {
+    background-color: #116530;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+  }
+  

@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JobsPortal - Job Details</title>
+  <link rel="stylesheet" href="{% static 'css/view.css' %}" />
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <div class="nav-logo">JobsPortal</div>
+      <div class="nav-menu">
+        <a href="#" class="nav-link">Login</a>
+        <a href="#" class="nav-link post-job-btn">Post a job</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="container">
+    <!-- Job Details Card -->
+    <div class="job-details-card">
+      <!-- Job Title and Company -->
+      <h1 class="job-title">Laravel Developer (Full Time) – <span>Match Company Limited</span></h1>
+
+      <!-- Quick Info (Qualification, Experience, etc.) -->
+      <ul class="quick-info">
+        <li><strong>Minimum Qualification:</strong> Bachelor</li>
+        <li><strong>Experience Level:</strong> 2+ years</li>
+        <li><strong>Location:</strong> San Francisco</li>
+        <li><strong>Application Deadline:</strong> 12/2/2022</li>
+        <li><strong>Salary Range:</strong> 15,000 – 50,000</li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="job-actions">
+        <button class="btn-outline">View Company</button>
+        <button class="btn-primary">Apply This Job</button>
+      </div>
+
+      <!-- Job Description -->
+      <h2 class="section-heading">Job Description</h2>
+      <p class="job-description">
+        We are searching for a Laravel developer to build web applications for our company.
+        In this role, you will design and create projects using Laravel framework and PHP, 
+        and assist the team in delivering high-quality web applications, services, and tools for our business.
+      </p>
+
+      <!-- Requirements -->
+      <h2 class="section-heading">Laravel Developer Requirements</h2>
+      <ul class="requirements-list">
+        <li>A degree in programming, computer science, or a related field</li>
+        <li>Strong understanding of the Laravel framework</li>
+        <li>Advanced knowledge of RESTful APIs and building or consuming APIs</li>
+        <li>Ability to work with databases and query using SQL</li>
+        <li>Proficiency in version control (Git) and deployment pipelines</li>
+        <li>Ability to work independently and in a team environment</li>
+        <li>Strong problem-solving skills</li>
+      </ul>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer-section">
+    <div class="container">
+      <p>© 2022 JobsPortal. Designed by Wilson Kinyua.</p>
+    </div>
+  </footer>
+</body>
+</html>

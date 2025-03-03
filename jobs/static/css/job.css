@@ -1,0 +1,139 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+  }
+  
+  /* Container Helper */
+  .container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  /* NAVBAR */
+  .navbar {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+  }
+  
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #116530;
+  }
+  
+  .nav-menu {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    font-weight: 500;
+    color: #333;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+  
+  .post-job-btn {
+    background-color: #116530;
+    color: #fff !important;
+    border-radius: 5px;
+  }
+  
+  /* CREATE JOB SECTION */
+  .create-job-section {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .create-job-section h1 {
+    font-size: 1.5rem;
+    color: #116530;
+    margin-bottom: 1rem;
+  }
+  
+  /* FORM ROWS */
+  .form-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+  
+  .full-width {
+    flex: 1 1 100%;
+  }
+  
+  .form-group label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+  }
+  
+  /* SUBMIT BUTTON */
+  .post-job-submit {
+    background-color: #116530;
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .post-job-submit:hover {
+    background-color: #0e4a26;
+  }
+  
+  /* FOOTER */
+  .footer-section {
+    background-color: #116530;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+  }
+  
+  .footer-section p {
+    margin: 0;
+  }
+  
