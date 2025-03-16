@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h4 class="mb-3 text-success">My Application List</h4>
+
+            <table class="table table-bordered">
+                <thead class="table-light">
+                    <tr>
+                        <th>Title</th>
+                        <th>Job Type</th>
+                        <th>Applied Date</th>
+                        <th>Application Deadline</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for application in applications %}
+                    <tr>
+                        <td>{{ application.job.job_title }}</td>
+                        <td>{{ application.job.job_type }}</td>
+                        <td>{{ application.applied_at }}</td>
+                        <td>{{ application.job.application_deadline|date:"d/m/Y" }}</td>
+                        <td>
+                            {% if application.status == 'Pending' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif application.status == 'selected' %}
+                                <span class="badge bg-success">Selected</span>
+                            {% elif application.status == 'rejected' %}
+                                <span class="badge bg-danger">Rejected</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Unknown</span>
+                            {% endif %}
+                        </td>
+                      <td class="action-icons">
+                            <a href="/editapplication/{{application.id}}" class="edit-icon" title="Edit">&#9998;</a>
+                            <a href="/deleteapplication/{{application.id}}" class="delete-icon" title="Delete">&#128465;</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="6" class="text-center text-muted">No job applications found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="/alljobs/" class="custom-back-btn">← Back</a>
+        </div>
+
+       
+
+    </div>
+</div>
+
+{% endblock %}

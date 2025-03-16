@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+  <!-- Main Content Container -->
+  <main class="container">
+    <!-- Job Details Card -->
+    <div class="job-details-card">
+      <!-- Job Title and Company -->
+      <h1 class="job-title">{{ job.job_title }} ({{ job.job_type }}) – <span>{{ job.company_name }}</span></h1>
+
+      <!-- Quick Info (Qualification, Experience, etc.) -->
+      <ul class="quick-info">
+        <li><strong>Minimum Qualification:</strong> {{ job.minimum_qualification }}</li>
+        <li><strong>Experience Level:</strong> {{ job.experience_level }}</li>
+        <li><strong>Location:</strong> {{ job.location }}</li>
+        <li><strong>Application Deadline:</strong>  {{ job.application_deadline }}</li>
+        <li><strong>Salary Range:</strong> {{ job.salary_range }}</li>
+        <li><strong>Application Posted At:</strong>  {{ job.posted_at }}</li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="job-actions">
+        <a href="{{ job.company_website }}" target="_blank">
+        <button class="btn-outline">View Company</button></a>
+
+    {% if user_has_applied %}
+        <!-- Disable Apply Button if already applied -->
+        <button class="btn-disabled" disabled>Already Applied</button>
+    {% else %}
+        <a href="/apply/{{job.id}}" target="_blank">
+        <button class="btn-primary" >Apply This Job</button></a>
+    {% endif %}   
+      </div>
+
+      <!-- Job Description -->
+      <h2 class="section-heading">Job Description</h2>
+      <p class="job-description">
+        {{ job.description }}
+      </p>
+
+      <!-- Requirements -->
+      <h2 class="section-heading">Job Skills Requirements</h2>
+      <ul class="requirements-list">
+        <li> {{ job.required_skills }}</li>
+        
+      </ul>
+
+      <br><br>
+      <a href="/alljobs/" class="custom-back-btn">← Back</a>
+
+    </div>
+  </main>
+
+
+
+
+
+{% endblock %} 

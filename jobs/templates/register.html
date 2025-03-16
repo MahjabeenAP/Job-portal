@@ -1,26 +1,67 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="uname" placeholder="Username" required><br>
-        <input type="text" name="fname" placeholder="First Name" required><br>
-        <input type="text" name="lname" placeholder="Last Name" required><br>
-        <input type="email" name="email" placeholder="Email" required><br>
-        <input type="password" name="psw1" placeholder="Password" required><br>
-        <input type="password" name="psw2" placeholder="Confirm Password" required><br>
+{% extends "base.html" %}
+{% load static %}
 
-        <label>User Type:</label>
-        <select name="user_type" required>
-            <option value="job_seeker">Job Seeker</option>
-            <option value="employer">Employer</option>
-        </select><br>
+{% block content %}
+<div class="container">
+    <div class="register-container">
+        <h3 class="text-center">Register</h3>
+        <form method="POST">
+            {% csrf_token %}
 
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
+            <!-- Username -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="uname" required>
+            </div>
+
+            <!-- First Name -->
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="fname" required>
+            </div>
+
+            <!-- Last Name -->
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="lname" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+
+            <!-- User Type (Employer or Job Seeker) -->
+            <div class="mb-3">
+                <label class="form-label">Register as:</label>
+                <select class="form-select" name="user_type" required>
+                    <option value="">Select Role</option>
+                    <option value="employer">Employer</option>
+                    <option value="job_seeker">Job Seeker</option>
+                </select>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password1" name="psw1" required>
+            </div>
+
+            <!-- Confirm Password -->
+            <div class="mb-3">
+                <label for="password2" class="form-label">Confirm Password</label>
+                <input type="password" class="form-control" id="password2" name="psw2" required>
+            </div>
+
+            <!-- Error Message Display -->
+            {% if er %}
+                <div class="alert alert-danger">{{ er }}</div>
+            {% endif %}
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success w-100">Create Account</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

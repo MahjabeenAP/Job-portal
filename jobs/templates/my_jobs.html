@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container jobs-list-section">
+    <h1>My Jobs List</h1>
+    
+    <table class="jobs-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Job Type</th>
+                <th>Posted Date</th>
+                <th>Application Deadline</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job in jobs %}
+            <tr>
+                <td>{{ job.job_title }}</td>
+                <td>{{ job.job_type.name }}</td>
+                <td>{{ job.posted_at }}</td>
+                <td>{{ job.application_deadline|date:"d/m/Y" }}</td>
+                <td class="action-icons">
+                    <a href="/editjob/{{job.id}}" class="edit-icon" title="Edit">&#9998;</a>
+                    <a href="/deletejob/{{job.id}}" class="delete-icon" title="Delete">&#128465;</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="no-data">No jobs posted yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a href="/emp/" class="custom-back-btn">← Back</a>
+
+</div>
+{% endblock %}

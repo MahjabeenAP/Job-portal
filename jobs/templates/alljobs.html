@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Find A <span class="highlight">Job</span> That <span class="highlight">Matches</span> Your Passion</h1>
+            <p>Hand-picked opportunities to work from home, remotely, freelance, full-time, part-time, contract, and internships.</p>
+            <div class="search-bar">
+                <form method="GET" action="{% url 'jobfn' %}">
+                <input type="text" name="q" placeholder="Search by job title or category..." value="{{ query }}">
+                <button>Search</button>
+            </form>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/hero.png' %}"  alt="Job Search"> 
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="categories"><section class="categories">
+        <h2>Popular Categories</h2>
+        <div class="category-grid">
+            {% for category in categories %}
+                <div class="category-card">{{ category.name }}</div>
+            {% empty %}
+                <p>No categories available.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Job Listings -->
+    <section class="jobs">
+        <h2>All Popular Listed Jobs</h2>
+        {% for job in jobs %}
+        <div class="job-list">
+            <div class="job-card">
+                <div class="job-icon">J</div>
+                <div class="job-info">
+                    <h3>{{ job.job_title }} ({{ job.category }})</h3>
+                    <p>{{ job.location }} • {{ job.salary_range }} • {{ job.job_type }}</p>
+                </div>
+                <button  class="view-details"  onclick="window.location.href='/viewjob/{{job.id}}'">View Details </button>
+            </div>
+           
+        
+        {% empty %}
+        <p>No jobs available.</p>
+        {% endfor %}
+        <button class="view-more" onclick="window.location.href='/myapplications'">MY APPLICATIONS</button>
+    </section>
+
+{% endblock %}    

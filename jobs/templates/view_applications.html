@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="applications-section">
+    <h1>Job Applications</h1>
+    {% if applications %}
+        <table class="applications-table">
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Applicant Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Application Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.job.job_title }}</td>
+                    <td>{{ application.job_seeker.username }}</td>
+                    <td>{{ application.email }}</td>
+                    <td>{{ application.phone }}</td>
+                    <td>{{ application.applied_at }}</td>
+                    <td>
+                        <a href="/viewapplicant/{{application.id}}" class="btn-view">View Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No applications found.</p>
+    {% endif %}
+    <br>
+    <a href="/emp/" class="custom-back-btn">← Back</a>
+</div>
+{% endblock %}

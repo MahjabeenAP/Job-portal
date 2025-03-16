@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, Job, Application  # Import your models
+from .models import User, Job, Application,JobCategory,JobType  # Import your models
 
 
 # Register your models here.
@@ -15,4 +15,6 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(Job)
 admin.site.register(Application)
+admin.site.register(JobCategory)
+admin.site.register(JobType)
 

@@ -1,20 +1,40 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    {% if messages %}
-        {% for message in messages %}
-            <p style="color:red;">{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-    <form method="POST">
-        {% csrf_token %}
-        <input type="text" name="uname" placeholder="Username" required><br>
-        <input type="password" name="psw" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-    </form>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="container">
+    <div class="login-container">
+        <h3 class="text-center">Login</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+          {% endif %}
+            <!-- Username or Email -->
+            <div class="mb-3">
+                <label for="username" class="form-label">Username or Email</label>
+                <input type="text" class="form-control" id="username" name="username" required>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-success w-100">Login</button>
+
+            <!-- Register Link -->
+            <div class="text-center mt-3">
+                <small>Don't have an account? <a href="/reg/">Register</a></small>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

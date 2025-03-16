@@ -1,0 +1,82 @@
+
+/* View Details Button */
+.btn-view {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #28a745; /* Green */
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    transition: background 0.3s ease-in-out;
+    white-space: nowrap; /* Prevents button from breaking into multiple lines */
+}
+
+.btn-view:hover {
+    background-color: #218838; /* Darker Green */
+}
+
+/* Table Responsiveness */
+.applications-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.applications-table th,
+.applications-table td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+.applications-table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .applications-table thead {
+        display: none;
+    }
+
+    .applications-table tr {
+        display: block;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px;
+        background: white;
+    }
+
+    .applications-table td {
+        display: block;
+        text-align: right;
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .applications-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .btn-view {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+    }
+}
+.applications-section h1 {
+    font-size: 1.5rem;
+    color: #116530;
+    margin-bottom: 1rem;
+  }
+

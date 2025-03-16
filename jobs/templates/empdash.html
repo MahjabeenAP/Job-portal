@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %} 
+
+
+
+{% block content %}
+<div class="dashboard-container">
+
+    <!-- Welcome Section -->
+    <div class="welcome-banner">
+        <h2>Welcome, Employer</h2>
+        <p>Manage your job postings and applications.</p>
+    </div>
+      <!-- Display Messages -->
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- Job Categories Section -->
+    <div class="section">
+        <h3>Job Categories</h3>
+        <div class="category-container">
+            <ul class="category-list">
+                {% for category in job_categories %}
+                    <li>{{ category.name }}</li>
+                {% endfor %}
+            </ul>
+            <div class="category-form">
+                <h4>Need Another Category?</h4>
+                <p>Can't find the category you need? Add a new one below!</p>
+                <form method="POST" action="/addcategory/">
+                    {% csrf_token %}
+                    <input type="text" name="category_name" placeholder="Enter new category" required>
+                    <button type="submit" class="btn btn-add">Add Category</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Job Types Section -->
+    <div class="section">
+        <h3>Job Types</h3>
+        <div class="category-container">
+            <ul class="category-list">
+                {% for job_type in job_types %}
+                    <li>{{ job_type.name }}</li>
+                {% endfor %}
+            </ul>
+            <div class="category-form">
+                <h4>Want a New Job Type?</h4>
+                <p>If your job type isn't listed, add a new one easily.</p>
+                <form method="POST" action="/addtype/">
+                    {% csrf_token %}
+                    <input type="text" name="job_type_name" placeholder="Enter new job type" required>
+                    <button type="submit" class="btn btn-add">Add Job Type</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Post Job Section -->
+    <div class="action-card post-job">
+        <h3>Looking for the Right Talent?</h3>
+        <p>Post a job and connect with skilled professionals today.</p>
+        <a href="/newjob/" class="btn btn-primary">Post a New Job</a>
+    </div>
+
+    <!-- Recent Applications Section -->
+    <div class="action-card applications">
+        <h3>Manage Your Applications</h3>
+        <p>Review the latest applications and take the next step in hiring.</p>
+        <a href="/mycandidates/" class="btn btn-secondary">View Applications</a>
+    </div>
+
+    <div class="action-card my-jobs">
+        <h3>Manage Your Job Listings</h3>
+        <p>Track and edit your job postings in one place.</p>
+        <a href="/myjobs/" class="btn btn-primary"> View My Jobs</a>
+    </div>
+    
+    
+
+</div>
+{% endblock %}

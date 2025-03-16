@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %} 
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-success mb-4">Application Details</h2>
+        
+
+        <div class="text-center mb-3">
+            {% if profile_photo %}
+                <img src="{{ profile_photo.url }}" alt="Profile Photo" class="rounded-circle border shadow-sm" width="150">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" alt="Default Profile" class="rounded-circle border shadow-sm" width="150">
+            {% endif %}
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><strong>Applicant Name:</strong> {{ applicant_name|default:"Not provided" }}</li>
+            <li class="list-group-item"><strong>Email:</strong> {{ email|default:"Not provided" }}</li>
+            <li class="list-group-item"><strong>Phone:</strong> {{ phone|default:"Not provided" }}</li>
+            <li class="list-group-item"><strong>Skills:</strong> {{ skills|default:"Not provided" }}</li>
+            <li class="list-group-item">
+                <strong>Cover Letter:</strong>
+                {% if cover_letter %}
+                    <a href="{{ cover_letter.url }}" target="_blank" class="btn btn-primary btn-sm">Download</a>
+                {% else %}
+                    <span class="text-muted">Not provided</span>
+                {% endif %}
+            </li>
+            <li class="list-group-item"><strong>Applied Date:</strong> {{ applied_date|date:"F d, Y, g:i a" }}</li>
+            <li class="list-group-item">
+                <strong>Application Status:</strong>
+                <span class="badge 
+                    {% if status == 'selected' %}bg-success
+                    {% elif status == 'rejected' %}bg-danger
+                    {% else %}bg-warning{% endif %}">
+                    {{ status|default:"Pending" }}
+                </span>
+            </li>
+        </ul>
+        <form method="post" action="{% url 'viewapplicantdetails' application.id %}">
+            {% csrf_token %}
+            <label for="status" class="fw-bold">Status:</label>
+            <select name="status" id="status" class="form-select">
+                <option value="pending" {% if application.status == "pending" %}selected{% endif %}>Pending</option>
+                <option value="selected" {% if application.status == "selected" %}selected{% endif %}>Selected</option>
+                <option value="rejected" {% if application.status == "rejected" %}selected{% endif %}>Rejected</option>
+            </select>
+            <button type="submit" class="btn btn-primary mt-2">Update</button>
+        </form>
+        <!-- <h3 class="mt-4">Update Status</h3>
+        <div class="d-grid gap-2 d-md-block">
+            <a href="#" class="btn btn-success">
+                ✅ Mark as Selected
+            </a>
+            <a href="#" class="btn btn-danger">
+                ❌ Mark as Rejected
+            </a>
+           -->
+        </div>
+<br>
+        <a href="/mycandidates/" class="custom-back-btn">← Back</a>
+    </div>
+</div>
+
+{% endblock %}
+
