@@ -76,3 +76,21 @@ class Application(models.Model):
     
     def __str__(self):
         return f"{self.applicant_fullname} applied for {self.job.job_title}"
+    
+
+class Interview(models.Model):
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("accepted", "Accepted"),
+        ("rejected", "Rejected"),
+    ]
+    application = models.OneToOneField('Application', on_delete=models.CASCADE)  # Link to application
+    interviewer = models.ForeignKey(User, on_delete=models.CASCADE)  # Employer conducting the interview
+    interview_date = models.DateTimeField(null=True,blank=True)  # Date and time of interview
+    venue = models.CharField(max_length=255)  # Interview venue
+    status = models.CharField(max_length=20, choices=[('Scheduled', 'Scheduled'), ('Completed', 'Completed')], default='Scheduled')
+    invitation_status = models.CharField(max_length=10, choices=STATUS_CHOICES, default="pending")
+    rejection_reason = models.TextField(blank=True, null=True)  # Store rejection reason
+    
+    def __str__(self):
+        return f"Interview for {self.application.job_seeker} - {self.application.job.job_title}"    

@@ -3,9 +3,8 @@
 {% block content %}
 
 <div class="container mt-5">
-    <div class="card shadow-lg p-4">
-        <h2 class="text-center text-success mb-4">Application Details</h2>
-        
+    <div class="card shadow-lg p-4 rounded">
+        <h2 class="text-center text-primary mb-4">Application Details</h2>
 
         <div class="text-center mb-3">
             {% if profile_photo %}
@@ -15,54 +14,97 @@
             {% endif %}
         </div>
 
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Applicant Name:</strong> {{ applicant_name|default:"Not provided" }}</li>
-            <li class="list-group-item"><strong>Email:</strong> {{ email|default:"Not provided" }}</li>
-            <li class="list-group-item"><strong>Phone:</strong> {{ phone|default:"Not provided" }}</li>
-            <li class="list-group-item"><strong>Skills:</strong> {{ skills|default:"Not provided" }}</li>
-            <li class="list-group-item">
-                <strong>Cover Letter:</strong>
-                {% if cover_letter %}
-                    <a href="{{ cover_letter.url }}" target="_blank" class="btn btn-primary btn-sm">Download</a>
-                {% else %}
-                    <span class="text-muted">Not provided</span>
-                {% endif %}
-            </li>
-            <li class="list-group-item"><strong>Applied Date:</strong> {{ applied_date|date:"F d, Y, g:i a" }}</li>
-            <li class="list-group-item">
-                <strong>Application Status:</strong>
-                <span class="badge 
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Applicant Name:</strong> {{ applicant_name|default:"Not provided" }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ email|default:"Not provided" }}</li>
+                <li class="list-group-item"><strong>Phone:</strong> {{ phone|default:"Not provided" }}</li>
+                <li class="list-group-item"><strong>Skills:</strong> {{ skills|default:"Not provided" }}</li>
+                <li class="list-group-item">
+                    <strong>Cover Letter:</strong>
+                    {% if cover_letter %}
+                        <a href="{{ cover_letter.url }}" target="_blank" class="btn btn-outline-primary btn-sm">Download</a>
+                    {% else %}
+                        <span class="text-muted">Not provided</span>
+                    {% endif %}
+                </li>
+                <li class="list-group-item"><strong>Applied Date:</strong> {{ applied_date|date:"F d, Y, g:i a" }}</li>
+                <li class="list-group-item">
+                    <strong>Application Status:</strong>
+                    <span class="badge status-badge">
+                        <span class="badge 
                     {% if status == 'selected' %}bg-success
                     {% elif status == 'rejected' %}bg-danger
                     {% else %}bg-warning{% endif %}">
                     {{ status|default:"Pending" }}
                 </span>
-            </li>
-        </ul>
-        <form method="post" action="{% url 'viewapplicantdetails' application.id %}">
-            {% csrf_token %}
-            <label for="status" class="fw-bold">Status:</label>
-            <select name="status" id="status" class="form-select">
-                <option value="pending" {% if application.status == "pending" %}selected{% endif %}>Pending</option>
-                <option value="selected" {% if application.status == "selected" %}selected{% endif %}>Selected</option>
-                <option value="rejected" {% if application.status == "rejected" %}selected{% endif %}>Rejected</option>
-            </select>
-            <button type="submit" class="btn btn-primary mt-2">Update</button>
-        </form>
-        <!-- <h3 class="mt-4">Update Status</h3>
-        <div class="d-grid gap-2 d-md-block">
-            <a href="#" class="btn btn-success">
-                ✅ Mark as Selected
-            </a>
-            <a href="#" class="btn btn-danger">
-                ❌ Mark as Rejected
-            </a>
-           -->
+                    </span>
+                </li>
+            </ul>
+            <div class="card shadow-sm p-3 mt-4">
+                <div class="card-body">
+                    <h5 class="text-dark fw-bold mb-3">Update Application Status</h5>
+                    <form method="post" action="{% url 'viewapplicantdetails' application.id %}">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="status" class="fw-bold">Select Status:</label>
+                            <select name="status" id="status" class="form-select border-2">
+                                <option value="pending" {% if application.status == "pending" %}selected{% endif %}>Pending</option>
+                                <option value="selected" {% if application.status == "selected" %}selected{% endif %}>Selected</option>
+                                <option value="rejected" {% if application.status == "rejected" %}selected{% endif %}>Rejected</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 fw-bold">Update Status</button>
+                    </form>
+                </div>
+            </div>
         </div>
-<br>
-        <a href="/mycandidates/" class="custom-back-btn">← Back</a>
+
+        {% if interview %}
+         <div class="card shadow-sm p-3 mt-4">
+                <div class="card-body">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Scheduled Interview</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Scheduled Date:</strong> {{ interview.interview_date|date:"F d, Y, g:i A" }}</li>
+                    <li class="list-group-item"><strong>Venue:</strong> {{ interview.venue }}</li>
+                    <li class="list-group-item"><strong>invitation_status:</strong> {{ interview.invitation_status }}</li>
+                    
+                    {% if interview.invitation_status == "rejected" and interview.rejection_reason %}
+                    <li class="list-group-item"><strong>Rejection Reason:</strong> {{ interview.rejection_reason }}</li>
+                    {% endif %}
+                </ul>
+
+                <div class="d-flex justify-content-between mt-3">
+                    <a href="{% url 'schedule_interview' application.id %}" class="btn btn-warning">
+                        <i class="fas fa-edit"></i> Reschedule Interview
+                    </a>
+
+                    <!-- Delete Interview Button -->
+                    <form action="{% url 'delete_interview' interview.id %}" method="POST" onsubmit="return confirm('Are you sure you want to delete this interview schedule?');">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i> Delete Interview
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% else %}
+            {% if status == "selected" %}
+            <a href="{% url 'schedule_interview' application.id %}" class="btn btn-success mt-3 w-100">
+            <i class="fas fa-calendar-plus"></i> Schedule Interview
+            </a>
+           {% else %}
+           <p class="text-muted text-center mt-3">Interviews can only be scheduled for selected candidates.</p>
+           {% endif %}
+        {% endif %}
+
+       
     </div>
+    <a href="/mycandidates/" class="btn btn-outline-secondary mt-3 w-100">← Back</a>
 </div>
 
 {% endblock %}
-

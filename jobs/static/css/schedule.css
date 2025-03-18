@@ -1,0 +1,29 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.card {
+    max-width: 600px;
+    margin: auto;
+    border-radius: 12px;
+    padding: 20px;
+    background: white;
+}
+
+.form-group label {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.btn {
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 1rem;
+}

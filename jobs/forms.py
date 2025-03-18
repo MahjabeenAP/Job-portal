@@ -1,5 +1,5 @@
 from django import forms
-from .models import Application,Job,JobCategory
+from .models import Application,Job,JobCategory,Interview
 from django.contrib.auth.models import User
 
 class ApplicationForm(forms.ModelForm):
@@ -60,4 +60,9 @@ class RegistrationForm(forms.ModelForm):
 
         return cleaned_data    
 
+
+class InterviewForm(forms.ModelForm):
+    class Meta:
+        model = Interview
+        fields = ['interview_date', 'venue']
 

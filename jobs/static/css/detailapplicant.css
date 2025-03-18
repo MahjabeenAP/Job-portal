@@ -1,24 +1,83 @@
-.container {
-    max-width: 600px;
-}
+
+
 .card {
     border-radius: 12px;
     background-color: #ffffff;
 }
+
 h2 {
     font-weight: bold;
+    font-size: 24px;
 }
+
 .profile-photo {
     width: 120px;
     height: 120px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .list-group-item {
     font-size: 16px;
     padding: 12px 20px;
+    background-color: #f9f9f9;
 }
+
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+.status-badge.bg-success {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-badge.bg-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-badge.bg-warning {
+    background-color: #ffc107;
+    color: black;
+}
+
 .btn {
     border-radius: 8px;
     font-weight: 600;
+    transition: all 0.3s ease-in-out;
 }
+
+.btn:hover {
+    opacity: 0.9;
+}
+.card {
+    border-radius: 12px;
+    background-color: #ffffff;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-select {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+}
+
+.btn-success {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #198754;
+    border: none;
+}
+
+.btn-success:hover {
+    background-color: #157347;
+}
+

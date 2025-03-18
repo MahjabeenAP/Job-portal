@@ -50,7 +50,11 @@
         {% empty %}
         <p>No jobs available.</p>
         {% endfor %}
+
+    <div class="actions">
         <button class="view-more" onclick="window.location.href='/myapplications'">MY APPLICATIONS</button>
+        <button class="view-more" onclick="window.location.href='/my-interviews'">MY INTERVIEWS</button>
+    </div>
     </section>
 
 {% endblock %}    

@@ -30,6 +30,9 @@ urlpatterns = [
     path('myapplications/',jobseekerapplications),
     path('editapplication/<int:v_id>',edit_application),
     path('deleteapplication/<int:v_id>',delete_application),
+    path('schedule-interview/<int:v_id>/', schedule_interview, name='schedule_interview'),
+     path('delete-interview/<int:interview_id>/', delete_interview, name='delete_interview'),
+    
 
     path('reg/',registerfn),
     path('',login_view),
@@ -44,8 +47,6 @@ urlpatterns = [
     path('deletejob/<int:p_id>',delete_job),
     path('mycandidates/',view_applications),
     path('viewapplicant/<int:v_id>',viewapplicantdetails, name='viewapplicantdetails'),
-    # path('update-status/<int:v_id>', update_application_status, name='update_application_status'),
-    
-
-
+    path('my-interviews/', my_interviews, name='my_interviews'),
+   
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

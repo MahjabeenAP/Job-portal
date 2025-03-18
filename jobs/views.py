@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse, get_object_or_404
-from .models import Job,Application,JobType,JobCategory
-from .forms import ApplicationForm,JobForm,JobCategory,RegistrationForm
+from .models import Job,Application,JobType,JobCategory,Interview
+from .forms import ApplicationForm,JobForm,JobCategory,RegistrationForm,InterviewForm
 from django.contrib.auth import authenticate, login
 from django.contrib import auth
 from django.contrib.auth.models import User
@@ -155,6 +155,8 @@ def view_applications(request):
 
 def viewapplicantdetails(request, v_id):
     application = get_object_or_404(Application, id=v_id)
+    
+    interview = Interview.objects.filter(application=application).first()
 
     if request.method == 'POST':
         new_status = request.POST.get('status')  # Get the new status from the form
@@ -173,8 +175,38 @@ def viewapplicantdetails(request, v_id):
         'applied_date': application.applied_at,
         'profile_photo': application.profile_photo,
         'status': application.status,
+        'interview': interview if application.status == 'selected' else None,  # Pass interview details
     }
     return render(request, 'applicant_detail.html', context)
+
+
+@login_required
+def schedule_interview(request, v_id):
+    application = get_object_or_404(Application, id=v_id)
+
+    # Fetch existing interview or create a new one
+    interview, created = Interview.objects.get_or_create(application=application, interviewer=request.user)
+
+    if request.method == "POST":
+        form = InterviewForm(request.POST, instance=interview)
+        if form.is_valid():
+            form.save()
+            if created:
+                messages.success(request, "Interview scheduled successfully!")
+            else:
+                messages.success(request, "Interview rescheduled successfully!")
+            return redirect('viewapplicantdetails', v_id=v_id)  # Redirect to view details
+    else:
+        form = InterviewForm(instance=interview)
+
+    return render(request, "schedule_interview.html", {"form": form, "application": application, "interview": interview})
+
+@login_required
+def delete_interview(request, interview_id):
+    interview = get_object_or_404(Interview, id=interview_id, interviewer=request.user)
+    interview.delete()
+    messages.success(request, "Interview schedule has been deleted successfully.")
+    return redirect('viewapplicantdetails', v_id=interview.application.id)  # Redirect back to application details
 
 
 ### my views   jobseeker  dashbord
@@ -259,3 +291,23 @@ def delete_application(request, v_id):
         return redirect('/myapplications')  # Redirect to application list after deletion
 
     return render(request, 'delete_application.html', {'application': application})
+
+
+@login_required
+def my_interviews(request):
+    interviews = Interview.objects.filter(application__job_seeker=request.user)
+
+    if request.method == "POST":
+        interview_id = request.POST.get("interview_id")
+        new_status = request.POST.get("status")
+        rejection_reason = request.POST.get("rejection_reason", "") if new_status == "rejected" else None
+
+        interview = get_object_or_404(Interview, id=interview_id, application__job_seeker=request.user)
+        interview.invitation_status = new_status
+        interview.rejection_reason = rejection_reason  # Store rejection reason if applicable
+        interview.save()
+
+        messages.success(request, f"Interview status updated to {new_status}.")
+        return redirect("my_interviews")  # Refresh page after update
+
+    return render(request, "my_interview.html", {"interviews": interviews})
