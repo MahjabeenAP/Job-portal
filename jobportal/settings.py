@@ -25,6 +25,15 @@ SECRET_KEY = 'django-insecure-ll^=&7f+wnay$jq4!+%i56-@k@s909!^t#6)-zbcbjfw+!k%0!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = "mahjabeenap4@gmail.com"  # Replace with your email
+EMAIL_HOST_PASSWORD = "kdbm chlo krgj wevd"  # Replace with your App Password
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
 ALLOWED_HOSTS = []
 
 
@@ -130,3 +139,4 @@ MEDIA_ROOT =BASE_DIR/ 'uploads'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

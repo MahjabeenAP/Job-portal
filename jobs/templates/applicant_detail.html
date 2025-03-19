@@ -4,6 +4,13 @@
 
 <div class="container mt-5">
     <div class="card shadow-lg p-4 rounded">
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+      {% endif %}
         <h2 class="text-center text-primary mb-4">Application Details</h2>
 
         <div class="text-center mb-3">

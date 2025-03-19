@@ -9,6 +9,11 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
+
+from .utils import send_interview_email
+from django.core.mail import send_mail
+from django.conf import settings
+
 # Create your views here.
 # registration
 User = get_user_model() 
@@ -64,6 +69,7 @@ def logoutfn(request):
 
 ### my views   employer dashbord
 
+@login_required
 def employer_dashboard(request):
     # Fetch all job categories and job types from the database
     job_categories = JobCategory.objects.all()
@@ -72,6 +78,7 @@ def employer_dashboard(request):
 
 
     # Handle adding a new job category
+@login_required    
 def add_category(request):
     if request.method == 'POST':
         category_name = request.POST.get('category_name')
@@ -85,6 +92,7 @@ def add_category(request):
 
    
     # Handle adding a new job type
+@login_required    
 def add_job_type(request):
     if request.method == 'POST':
         job_type_name = request.POST.get('job_type_name')
@@ -117,11 +125,12 @@ def job_create(request):
 
 
 #filter jobs
+@login_required
 def my_jobs(request):
     jobs = Job.objects.filter(employer=request.user)
     return render(request, 'my_jobs.html', {'jobs': jobs})
 
-
+@login_required
 def update_job(request,p_id):
     if request.method=='POST':
         x=Job.objects.get(id=p_id)
@@ -136,7 +145,8 @@ def update_job(request,p_id):
 
     
 
-# delete job    
+# delete job   
+@login_required 
 def delete_job(request,p_id):
     job = get_object_or_404(Job, id=p_id, employer=request.user)  # Ensure only the job owner can delete
 
@@ -147,12 +157,12 @@ def delete_job(request,p_id):
 
     return render(request, 'job_delete.html', {'job': job})    
     
-
+@login_required
 def view_applications(request):
     applications = Application.objects.filter(job__employer=request.user)  # Get applications for employer's jobs
     return render(request, 'view_applications.html', {'applications': applications}) 
 
-
+@login_required
 def viewapplicantdetails(request, v_id):
     application = get_object_or_404(Application, id=v_id)
     
@@ -191,10 +201,15 @@ def schedule_interview(request, v_id):
         form = InterviewForm(request.POST, instance=interview)
         if form.is_valid():
             form.save()
+              # **Send email notification**
+            send_interview_email(interview)
+
             if created:
-                messages.success(request, "Interview scheduled successfully!")
+                messages.success(request, "Interview scheduled successfully! Email sent to the candidate.")
             else:
-                messages.success(request, "Interview rescheduled successfully!")
+                messages.success(request, "Interview rescheduled successfully! Email notification sent.")
+
+            print("Sending email to:", interview.application.job_seeker.email)    
             return redirect('viewapplicantdetails', v_id=v_id)  # Redirect to view details
     else:
         form = InterviewForm(instance=interview)
@@ -212,7 +227,9 @@ def delete_interview(request, interview_id):
 ### my views   jobseeker  dashbord
 
 # job model display
+@login_required
 def jobfn(request):
+    
     query = request.GET.get('q', '')  # Get search query from URL parameter
     jobs = Job.objects.all().order_by('-posted_at')  # Fetch all jobs
     categories = JobCategory.objects.all()
@@ -224,6 +241,7 @@ def jobfn(request):
 
 
 # view one job
+@login_required
 def detailjobfn(request,job_id):
     job = Job.objects.get( id=job_id)
     user_has_applied = Application.objects.filter(job=job, job_seeker=request.user).exists()
@@ -261,7 +279,7 @@ def applicationformfn(request, job_id):
     return render(request, "job_apply.html", {"form": form, "job": job, "page_title": "Apply"})
 
 
-
+@login_required
 def jobseekerapplications(request):
     applications = Application.objects.filter(job_seeker=request.user)
     return render(request, 'myapplication.html', {'applications': applications})
@@ -303,11 +321,45 @@ def my_interviews(request):
         rejection_reason = request.POST.get("rejection_reason", "") if new_status == "rejected" else None
 
         interview = get_object_or_404(Interview, id=interview_id, application__job_seeker=request.user)
+        previous_status = interview.invitation_status  # Store previous status
+
         interview.invitation_status = new_status
         interview.rejection_reason = rejection_reason  # Store rejection reason if applicable
         interview.save()
 
         messages.success(request, f"Interview status updated to {new_status}.")
+
+         # Only send an email if the status has changed
+        if previous_status != new_status:
+            send_mail(
+                subject="Job Seeker Response to Interview Invitation",
+                message=f"""
+                Dear {interview.application.job.employer.first_name},
+
+                The job seeker **{interview.application.job_seeker.first_name}** has **{new_status.lower()}** the interview invitation for the job **{interview.application.job.job_title}**.
+
+                📅 **Interview Date:** {interview.interview_date.strftime('%Y-%m-%d %I:%M %p')}
+                🏢 **Venue:** {interview.venue}
+                💼 **Status:** {new_status}
+
+                {f"📌 Reason for Rejection: {rejection_reason}" if new_status == "rejected" else ""}
+
+                Please log in to the job portal for further actions.
+
+                Regards,  
+                Job Portal System
+                """,
+                from_email=settings.EMAIL_HOST_USER,
+                recipient_list=[interview.application.job.employer.email],
+                fail_silently=False,
+            )
+
         return redirect("my_interviews")  # Refresh page after update
 
     return render(request, "my_interview.html", {"interviews": interviews})
+
+
+
+
+
+
