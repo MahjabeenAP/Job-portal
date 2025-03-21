@@ -1,0 +1,218 @@
+GET http://127.0.0.1:8000/api/jobs/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/jobs/6/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/users/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/users/4
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/jobcategories/
+Authorization:Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+
+###
+GET http://127.0.0.1:8000/api/jobcategories/2
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/jobtypes/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/jobtypes/2
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/applications/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/applications/3
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/interviews/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+GET http://127.0.0.1:8000/api/interviews/5
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+###
+POST http://127.0.0.1:8000/api/register/
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "testuser@example.com",
+  "password": "123456",
+  "user_type": "employer"
+}
+
+###
+POST http://127.0.0.1:8000/api/login/
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "password": "password123"
+}
+
+###
+POST http://127.0.0.1:8000/api/jobcategories/
+Content-Type: application/json
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+{
+  "name": "IT"
+}
+
+
+###
+POST http://127.0.0.1:8000/api/jobs/
+Content-Type: application/json
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+{
+  "title": "Software Engineer",
+  "description": "Develop applications using Python.",
+  "required_skills": "Python, Django",
+  "location": "Bangalore",
+  "salary": 60000,
+  "employer": 12,
+  "category": 8,
+  "job_type": 1
+}
+
+###
+POST http://127.0.0.1:8000/api/applications/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="job"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="job_seeker"
+
+5
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="cover_letter"; filename="Mahjabeen AP_Entri.pdf"
+Content-Type: application/pdf
+
+< C:\Users\mahja\Downloads\Mahjabeen AP_Entri.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
+POST http://127.0.0.1:8000/api/interviews/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: application/json
+
+{
+  "application": 3,
+  "interviewer": 3,
+  "interview_date": "2025-03-25T14:00:00Z",
+  "venue": "Godrej Office, Kannur",
+  "status": "Scheduled"
+}
+
+###
+POST http://127.0.0.1:8000/api/jobcategories/
+Content-Type: application/json
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+{
+  "name": "Remote"
+}
+
+###
+PUT http://127.0.0.1:8000/api/jobs/13/
+Content-Type: application/json
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+
+{
+  "job_title": "Software Engineer Updated",
+  "description": "Updated job description for a software engineer.",
+  "required_skills": "Python, Django, REST API",
+  "location": "Remote",
+  "salary": "60000",
+  "company_name": "Tech Solutions",
+  "job_type": 1,
+  "job_category": 8,
+  "employer":12
+}
+
+###
+PUT http://127.0.0.1:8000/api/applications/19/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="job"
+
+1
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="job_seeker"
+
+7
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="cover_letter"; filename="Mahjabeen AP_Entri.pdf"
+Content-Type: application/pdf
+
+< C:\Users\mahja\Downloads\Mahjabeen AP_Entri.pdf
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+PUT http://127.0.0.1:8000/api/interviews/8/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: application/json
+
+{
+  "application": 3,
+  "interviewer": 3,
+  "interview_date": "2025-03-25T14:00:00Z",
+  "venue": "Godrej Office, Kannur , KERALA",
+  "status": "Scheduled"
+}
+
+###
+DELETE  http://127.0.0.1:8000/api/interviews/11/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: application/json
+
+{
+  "message": "Interview deleted successfully."
+}
+
+###
+DELETE  http://127.0.0.1:8000/api/jobs/13/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: application/json
+
+{
+  "message": " deleted successfully."
+}
+
+###
+DELETE  http://127.0.0.1:8000/api/applications/19/
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a
+Content-Type: application/json
+
+{
+  "message": " deleted successfully."
+}
+
+###
+POST http://127.0.0.1:8000/api/logout/
+Content-Type: application/json
+Authorization: Token 106e2db86f160976b97e3ae09742e2ebef99f45a

@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from jobs.views import *
 
 from django.conf import settings
@@ -37,6 +37,7 @@ urlpatterns = [
     path('reg/',registerfn),
     path('',login_view),
     path('logout/',logoutfn),
+    path('api/', include('jobs.urls')),  # API URLs are prefixed with /api/
     
     path('emp/',employer_dashboard),
     path('newjob/',job_create,name="job_create"),
