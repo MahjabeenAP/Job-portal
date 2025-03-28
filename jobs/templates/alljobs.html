@@ -25,7 +25,10 @@
         <h2>Popular Categories</h2>
         <div class="category-grid">
             {% for category in categories %}
-                <div class="category-card">{{ category.name }}</div>
+            <form method="GET" action="{% url 'jobfn' %}">
+                <input type="hidden" name="category" value="{{ category.name }}">
+                <button class="category-card  {% if selected_category == category.name %}active{% endif %}" type="submit">{{ category.name }}</button>
+            </form>
             {% empty %}
                 <p>No categories available.</p>
             {% endfor %}

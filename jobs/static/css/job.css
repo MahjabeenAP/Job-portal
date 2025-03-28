@@ -43,6 +43,20 @@
     border-radius: 5px;
     font-size: 0.9rem;
   }
+  /* Adjust Job Title, Required Skill, and Job Description Width */
+  form .form-group input[type="text"],
+  form .form-group textarea,
+  form .form-group select {
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box;
+  }
+/* Adjust Textarea Height */
+form .form-group textarea {
+  height: 150px; /* You can adjust this height */
+  resize: vertical; /* Allows resizing if needed */
+}
+
   
   /* SUBMIT BUTTON */
   .post-job-submit {
@@ -61,4 +75,12 @@
     background-color: #0e4a26;
   }
  
-  
+  /* Mobile Responsive Fix */
+@media (max-width: 768px) {
+  .form-row {
+      flex-direction: column;
+  }
+  .form-group {
+      width: 100%;
+  }
+}

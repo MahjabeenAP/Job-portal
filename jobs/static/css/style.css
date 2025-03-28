@@ -82,18 +82,19 @@ body {
 }
 
 .category-card {
-    background: white;
-    padding: 12px 18px;
-    border-radius: 20px;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    font-weight: 500;
+    display: inline-block;
+    background-color:green;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
     cursor: pointer;
-    transition: 0.3s ease;
+    border-radius: 20px;
+    font-size: 14px;
+    transition: background-color 0.3s;
 }
 
-.category-card:hover {
-    background-color: #28a745;
+.category-card:hover, .category-card.active {
+    background-color: #4CAF50;
     color: white;
 }
 

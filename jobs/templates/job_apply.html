@@ -30,7 +30,7 @@
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             
-            <div class="form-group">
+            <div class="form-group" style=" max-width:600px; " >
                 <label>Full Name</label>
                 {{ form.applicant_fullname }}
             </div>

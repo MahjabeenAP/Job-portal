@@ -231,13 +231,23 @@ def delete_interview(request, interview_id):
 def jobfn(request):
     
     query = request.GET.get('q', '')  # Get search query from URL parameter
+    category_name = request.GET.get('category', '')
+
     jobs = Job.objects.all().order_by('-posted_at')  # Fetch all jobs
     categories = JobCategory.objects.all()
 
     if query:
         jobs = jobs.filter(Q(job_title__icontains=query) | Q(category__name__icontains=query))
+    
+    if category_name:
+        jobs = jobs.filter(category__name=category_name)
 
-    return render(request, 'alljobs.html', {'jobs': jobs,'categories': categories,'query': query})
+    return render(request, 'alljobs.html', {
+        'jobs': jobs,
+        'categories': categories,
+        'query': query,
+        'selected_category': category_name
+    })
 
 
 # view one job

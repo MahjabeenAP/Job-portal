@@ -4,36 +4,36 @@
 {% block content %}
 <div class="container">
     <div class="register-container">
-        <h3 class="text-center">Register</h3>
+        <h3>Register</h3>
         <form method="POST">
             {% csrf_token %}
 
             <!-- Username -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="uname" required>
+                <input type="text" class="form-control" id="username" name="uname" placeholder="Choose a username" required>
             </div>
 
             <!-- First Name -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="first_name" class="form-label">First Name</label>
-                <input type="text" class="form-control" id="first_name" name="fname" required>
+                <input type="text" class="form-control" id="first_name" name="fname" placeholder="Enter your first name" required>
             </div>
 
             <!-- Last Name -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="last_name" class="form-label">Last Name</label>
-                <input type="text" class="form-control" id="last_name" name="lname" required>
+                <input type="text" class="form-control" id="last_name" name="lname" placeholder="Enter your last name" required>
             </div>
 
             <!-- Email -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="example@email.com" required>
             </div>
 
-            <!-- User Type (Employer or Job Seeker) -->
-            <div class="mb-3">
+            <!-- User Type -->
+            <div class="mb-4">
                 <label class="form-label">Register as:</label>
                 <select class="form-select" name="user_type" required>
                     <option value="">Select Role</option>
@@ -43,25 +43,29 @@
             </div>
 
             <!-- Password -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="password1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password1" name="psw1" required>
+                <input type="password" class="form-control" id="password1" name="psw1" placeholder="Create a password" required>
             </div>
 
             <!-- Confirm Password -->
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="password2" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="password2" name="psw2" required>
+                <input type="password" class="form-control" id="password2" name="psw2" placeholder="Confirm your password" required>
             </div>
 
-            <!-- Error Message Display -->
+            <!-- Error Display -->
             {% if er %}
-                <div class="alert alert-danger">{{ er }}</div>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                {{ er }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
             {% endif %}
 
             <!-- Submit Button -->
-            <button type="submit" class="btn btn-success w-100">Create Account</button>
+            <button type="submit" class="w-100">Create Account</button>
         </form>
     </div>
 </div>
 {% endblock %}
+
